@@ -10,7 +10,8 @@ class App extends Component {
     super();
 
     this.state = {
-      scratchPattern: []
+      scratchPattern: [],
+      mainPattern: []
     }
 
   }
@@ -28,6 +29,14 @@ class App extends Component {
   }
 
   getMainPattern = board => {
+
+    let pattern = this.patternFromBoard(board);
+
+    if (pattern === 'invalid') {
+      return
+    }
+
+    this.setState({ mainPattern: pattern })
 
   }
 
