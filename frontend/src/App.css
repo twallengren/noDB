@@ -5,6 +5,7 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
+  background-image: url(connectwork.png)
 }
 
 .MainBoardDiv {
@@ -42,6 +43,7 @@
   flex-direction: column;
   align-items: center;
   overflow: scroll;
+  padding: 20px;
 }
 
 .GameOfLife {

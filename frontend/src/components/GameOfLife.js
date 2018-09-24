@@ -41,9 +41,15 @@ class GameOfLife extends Component {
         return (
             <div className="GameOfLife">
 
-                <h4>
+                <h4 style={{ 'color': "#F0F0DF" }}>
                     {this.props.title}
                 </h4>
+
+                <div style={{ 'width': '100%', 'color': "#F0F0DF" }}>
+
+                    Simulation Status: {this.statusTranslate()}
+
+                </div>
 
                 <GolCanvas
                     status={this.state.status}
@@ -57,12 +63,6 @@ class GameOfLife extends Component {
                     Start/Stop Simulation
 
                 </button>
-
-                <div style={{ 'width': '100%' }}>
-
-                    Simulation Status: {this.statusTranslate()}
-
-                </div>
 
             </div>
         )

@@ -193,15 +193,15 @@ class GolCanvas extends Component {
 
                 <div style={{ 'width': '100%' }}>
 
-                    <button className="confirmationButton" onClick={this.handleClearClick} style={{ 'width': '100%' }} >
-
-                        Clear Canvas (Sim Must Be Running)
-
-                    </button>
-
-                    <button onClick={() => {
+                    <button style={{ 'width': '100%' }} onClick={() => {
                         this.props.getPattern(this.state.lifeMatrix)
                     }}>Save Pattern to State</button>
+
+                    <button className="confirmationButton" onClick={this.handleClearClick} style={{ 'width': '100%' }} >
+
+                        Clear Canvas (Simulation must be Running)
+
+                    </button>
 
                 </div>
 
