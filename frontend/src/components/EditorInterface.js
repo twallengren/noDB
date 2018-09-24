@@ -11,7 +11,8 @@ class EditorInterface extends Component {
         super(props);
 
         this.state = {
-            patterns: []
+            patterns: [],
+            newName: ''
         }
 
     }
@@ -22,21 +23,45 @@ class EditorInterface extends Component {
         })
     }
 
+    addPattern = () => {
+
+        // assume pattern is passed in as a prop
+        if (this.props.pattern.length === 0) {
+            return
+        } else {
+            let pattern = this.props.pattern;
+            axios.post(`${BASE_URL}/api/patterns`, { name: this.state.newName, tiling: pattern }).then(response => {
+                this.setState({ patterns: response.data })
+            })
+        }
+    }
+
+    handleNewName = event => {
+        this.setState({ newName: event.target.value })
+    }
+
+    deletePattern = patternid => {
+        axios.delete(`${BASE_URL}/api/patterns/${patternid}`).then(response => {
+            this.setState({ patterns: response.data })
+        })
+    }
+
     render() {
 
         // Define patterns to display
         const patterns = this.state.patterns.map(pattern => {
             return (
 
-                <Pattern name={pattern.name} tiling={pattern.tiling} id={pattern.id} key={pattern.id} />
+                <Pattern name={pattern.name} tiling={pattern.tiling} id={pattern.id} key={pattern.id} delFunc={this.deletePattern} />
 
             );
         });
 
         return (
 
-            <div style={{ 'width': '100%' }}>
-                <button>Add Pattern</button>
+            <div className="AllPatterns">
+                <input placeholder='Name of New Pattern' onChange={this.handleNewName} />
+                <button style={{ 'width': '100%' }} onClick={this.addPattern}>Add Pattern from Scratch Board</button>
                 {patterns}
             </div>
 

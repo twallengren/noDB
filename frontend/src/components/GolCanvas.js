@@ -181,7 +181,7 @@ class GolCanvas extends Component {
 
     render() {
         return (
-            <div className='GolDiv'>
+            <div className='GolCanvas'>
 
                 <canvas
                     ref="golcanvas"
@@ -191,13 +191,17 @@ class GolCanvas extends Component {
                     style={{ 'float': '' }} />
                 {this.update()}
 
-                <div>
+                <div style={{ 'width': '100%' }}>
 
-                    <button className="confirmationButton" onClick={this.handleClearClick}>
+                    <button className="confirmationButton" onClick={this.handleClearClick} style={{ 'width': '100%' }} >
 
                         Clear Canvas (Sim Must Be Running)
 
                     </button>
+
+                    <button onClick={() => {
+                        this.props.getPattern(this.state.lifeMatrix)
+                    }}>Save Pattern to State</button>
 
                 </div>
 

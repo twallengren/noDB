@@ -31,4 +31,41 @@ module.exports = {
 
     },
 
+    add: (req, res, next) => {
+
+        let { name, tiling } = req.body;
+
+        if (name === '') {
+            name = `Pattern No ${id}`
+        }
+
+        const pattern = {
+            name: name,
+            tiling: tiling,
+            id: id
+        }
+
+        patterns.push(pattern);
+        id++;
+
+        res.status(200).send(patterns)
+
+    },
+
+    delete: (req, res, next) => {
+
+        const { patternID } = req.params;
+
+        updatedpatterns = patterns.filter(pattern => {
+
+            return pattern.id != patternID
+
+        })
+
+        patterns = updatedpatterns;
+
+        res.status(200).send(patterns)
+
+    }
+
 }

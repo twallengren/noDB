@@ -13,9 +13,9 @@ app.use(cors())
 
 // Create endpoints
 app.get("/api/patterns", controller.read)
-//app.delete("/api/:id", controller.delete)
+app.delete("/api/patterns/:patternID", controller.delete)
 //app.put("/api/joke/:id", controller.update)
-//app.post("/api", controller.add)
+app.post("/api/patterns", controller.add)
 
 // Tell the app to start listening on port 3005
 app.listen(3005, () => {

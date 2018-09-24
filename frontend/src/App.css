@@ -9,11 +9,13 @@
 
 .MainBoardDiv {
   height: 100%;
+  
 }
 
 .ScratchBoardDiv {
   height: 100%;
   width: 30%;
+  
 }
 
 .PatternDisplay {
@@ -21,16 +23,28 @@
   height: 100%;
   padding: 10px;
   display: flex;
+  justify-content: center;
 }
 
 .PatternButton {
   cursor: pointer;
-  height: 60px;
   width: 300px;
 }
 
 .ButtonCanvas {
   height: 100px;
   width: 100px;
+}
+
+.AllPatterns {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+}
+
+.GameOfLife {
+  
 }
 

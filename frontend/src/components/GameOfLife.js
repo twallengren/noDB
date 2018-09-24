@@ -39,21 +39,26 @@ class GameOfLife extends Component {
 
     render() {
         return (
-            <div className="puzzleBox gameoflifePB">
+            <div className="GameOfLife">
 
                 <h4>
                     {this.props.title}
                 </h4>
 
-                <GolCanvas status={this.state.status} numwide={this.props.numwide} numhigh={this.props.numhigh} scl={this.props.scl} />
+                <GolCanvas
+                    status={this.state.status}
+                    numwide={this.props.numwide}
+                    numhigh={this.props.numhigh}
+                    scl={this.props.scl}
+                    getPattern={this.props.getPattern} />
 
-                <button className="confirmationButton" onClick={this.handleSimClick}>
+                <button className="confirmationButton" onClick={this.handleSimClick} style={{ 'width': '100%' }}>
 
                     Start/Stop Simulation
 
                 </button>
 
-                <div>
+                <div style={{ 'width': '100%' }}>
 
                     Simulation Status: {this.statusTranslate()}
 
