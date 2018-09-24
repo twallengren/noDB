@@ -61,7 +61,7 @@ class EditorInterface extends Component {
 
             <div className="AllPatterns">
                 <input placeholder='Name of New Pattern' onChange={this.handleNewName} style={{ 'width': '100%' }} />
-                <button style={{ 'width': '100%' }} onClick={this.addPattern}>Add Pattern from Scratch Board (must be saved to state)</button>
+                <button className="RegularButton" style={{ 'width': '100%', 'cursor': 'pointer' }} onClick={this.addPattern}>Add Pattern from Scratch Board (must be saved to state)</button>
                 {patterns}
             </div>
 

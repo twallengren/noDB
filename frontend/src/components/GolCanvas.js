@@ -188,16 +188,16 @@ class GolCanvas extends Component {
                     width={this.props.scl * this.props.numwide}
                     height={this.props.scl * this.props.numhigh}
                     onClick={this.canvasClickHandler}
-                    style={{ 'float': '' }} />
+                    style={{ 'cursor': 'pointer' }} />
                 {this.update()}
 
                 <div style={{ 'width': '100%' }}>
 
-                    <button style={{ 'width': '100%' }} onClick={() => {
+                    <button className="RegularButton" style={{ 'width': '100%', 'cursor': 'pointer' }} onClick={() => {
                         this.props.getPattern(this.state.lifeMatrix)
                     }}>Save Pattern to State</button>
 
-                    <button className="confirmationButton" onClick={this.handleClearClick} style={{ 'width': '100%' }} >
+                    <button className="RegularButton" onClick={this.handleClearClick} style={{ 'width': '100%', 'cursor': 'pointer' }} >
 
                         Clear Canvas (Simulation must be Running)
 

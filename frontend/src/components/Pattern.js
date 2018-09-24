@@ -47,7 +47,7 @@ class Pattern extends Component {
                     height={20 * this.props.tiling.length}
                     className="buttonCanvas" />
                 <button className='PatternButton'>{this.props.name}</button>
-                <button onClick={() => { this.props.delFunc(this.props.id) }}>DELETE</button>
+                <button onClick={() => { this.props.delFunc(this.props.id) }} style={{ 'cursor': 'pointer' }}>DELETE</button>
 
             </div>
         );

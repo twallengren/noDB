@@ -58,7 +58,7 @@ class GameOfLife extends Component {
                     scl={this.props.scl}
                     getPattern={this.props.getPattern} />
 
-                <button className="confirmationButton" onClick={this.handleSimClick} style={{ 'width': '100%' }}>
+                <button className="RegularButton" onClick={this.handleSimClick} style={{ 'width': '100%', 'cursor': 'pointer' }}>
 
                     Start/Stop Simulation
 
