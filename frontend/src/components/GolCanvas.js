@@ -193,11 +193,11 @@ class GolCanvas extends Component {
 
                 <div style={{ 'width': '100%' }}>
 
-                    <button className="RegularButton" style={{ 'width': '100%', 'cursor': 'pointer' }} onClick={() => {
+                    <button className="RegularButton" onClick={() => {
                         this.props.getPattern(this.state.lifeMatrix)
                     }}>Save Pattern to State</button>
 
-                    <button className="RegularButton" onClick={this.handleClearClick} style={{ 'width': '100%', 'cursor': 'pointer' }} >
+                    <button className="RegularButton" onClick={this.handleClearClick} >
 
                         Clear Canvas (Simulation must be Running)
 
@@ -206,7 +206,7 @@ class GolCanvas extends Component {
                 </div>
 
 
-            </div>
+            </div >
         )
     }
 }

@@ -41,11 +41,11 @@ class GameOfLife extends Component {
         return (
             <div className="GameOfLife">
 
-                <h4 style={{ 'color': "#F0F0DF" }}>
+                <h4 style={{ 'color': "#1b1b1b" }}>
                     {this.props.title}
                 </h4>
 
-                <div style={{ 'width': '100%', 'color': "#F0F0DF" }}>
+                <div style={{ 'width': '100%', 'color': "#1b1b1b" }}>
 
                     Simulation Status: {this.statusTranslate()}
 
@@ -58,7 +58,7 @@ class GameOfLife extends Component {
                     scl={this.props.scl}
                     getPattern={this.props.getPattern} />
 
-                <button className="RegularButton" onClick={this.handleSimClick} style={{ 'width': '100%', 'cursor': 'pointer' }}>
+                <button className="RegularButton" onClick={this.handleSimClick} >
 
                     Start/Stop Simulation
 
