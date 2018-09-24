@@ -1,0 +1,36 @@
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.MainBoardDiv {
+  height: 100%;
+}
+
+.ScratchBoardDiv {
+  height: 100%;
+  width: 30%;
+}
+
+.PatternDisplay {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+}
+
+.PatternButton {
+  cursor: pointer;
+  height: 60px;
+  width: 300px;
+}
+
+.ButtonCanvas {
+  height: 100px;
+  width: 100px;
+}
+
