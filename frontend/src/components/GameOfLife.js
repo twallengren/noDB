@@ -1,7 +1,15 @@
 /*
 
-Usage in App.js 
-<GameOfLife numwide={int} numhigh={int} scl={int=20} title={"Component Header"} />
+Usage
+<GameOfLife 
+    numwide={int > 0} // Number of columns (how many cells wide canvas should be)
+    numhigh={int > 0} // Number of rows (how many cell tall canvas should be)
+    scl={int=20} // How many pixels make one side of a square cell 
+    title={string} // Title shown above canvas
+    />
+
+This component is a wrapper for the component with the actual game of life (GolCanvas.js).
+Displays title, and handles/displays simulation status.
 
 */
 
@@ -14,12 +22,14 @@ class GameOfLife extends Component {
 
         super(props);
 
+        // status dictates whether the simulation is running or not (1 & 0, respectively)
         this.state = {
             status: 0
         }
 
     }
 
+    // Changes status on state upon click (0 <--> 1)
     handleSimClick = event => {
 
         const newstat = (this.state.status + 1) % 2;
@@ -27,6 +37,7 @@ class GameOfLife extends Component {
 
     }
 
+    // Translate status on state into PAUSED or RUNNING for display in-app
     statusTranslate = () => {
 
         if (this.state.status === 0) {
@@ -56,7 +67,9 @@ class GameOfLife extends Component {
                     numwide={this.props.numwide}
                     numhigh={this.props.numhigh}
                     scl={this.props.scl}
-                    getPattern={this.props.getPattern} />
+                    getPattern={this.props.getPattern}
+                    cursorPattern={this.props.cursorPattern}
+                />
 
                 <button className="RegularButton" onClick={this.handleSimClick} >
 

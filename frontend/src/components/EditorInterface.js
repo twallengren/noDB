@@ -52,7 +52,14 @@ class EditorInterface extends Component {
         const patterns = this.state.patterns.map(pattern => {
             return (
 
-                <Pattern name={pattern.name} tiling={pattern.tiling} id={pattern.id} key={pattern.id} delFunc={this.deletePattern} />
+                <Pattern
+                    name={pattern.name}
+                    tiling={pattern.tiling}
+                    id={pattern.id}
+                    key={pattern.id}
+                    delFunc={this.deletePattern}
+                    setCursorClick={this.props.setCursorClick}
+                />
 
             );
         });

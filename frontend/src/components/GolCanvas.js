@@ -1,3 +1,18 @@
+/*
+
+Usage
+<GolCanvas
+    status={int 0 or int 1} // PAUSED and RUNNING, respectively
+    numwide={int > 0} // Number of columns (how many cells wide canvas should be)
+    numhigh={int > 0} // Number of rows (how many cell tall canvas should be)
+    scl={int > 0} // How many pixels make one side of a square cell 
+    getPattern={this.props.getPattern} // Passed down from App.js so it can access lifeMatrix
+    />
+
+This component contains the canvas for the game of life. Handles animation and direct interaction with canvas.
+
+*/
+
 import React, { Component } from 'react';
 
 class GolCanvas extends Component {
@@ -6,33 +21,37 @@ class GolCanvas extends Component {
 
         super(props);
 
+        // lifeMatrix will be used to determine which cells should be filled in at any time
+        // lastTime represents last time canvas updated - used for controlling animation speed
         this.state = {
             lifeMatrix: Array(this.props.numwide).fill().map(() => Array(this.props.numhigh).fill(0)),
-            lastTime: 0
+            lastTime: 0,
         }
 
     }
 
     componentDidMount = () => {
 
-        // Find canvas element and assign context to variable
+        // Find canvas element from render method and assign context to variable
         const canvas = this.refs.golcanvas;
         this.ctx = canvas.getContext("2d");
 
         // Scale context
         this.ctx.scale(this.props.scl, this.props.scl);
 
-        // Fill the canvas black
+        // Fill the canvas dark by default
         this.ctx.fillStyle = "#303030";
         this.ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     }
 
+    // Function that will fill in a point on the canvas with a given color
     setPoint = (x, y, color) => {
         this.ctx.fillStyle = color;
         this.ctx.fillRect(x, y, 1, 1);
     }
 
+    // Function to handle clicks on the canvas (should fill in the canvas where clicked)
     canvasClickHandler = event => {
 
         // Get x & y coordinates of click
@@ -42,7 +61,16 @@ class GolCanvas extends Component {
         // Create copy of lifeMatrix
         const life = Array.from(this.state.lifeMatrix);
 
-        // Check if point is marked in state
+        // Get cursor pattern, determine size
+        let pattern = this.props.cursorPattern;
+        pattern = (pattern[0].map((col, i) => pattern.map(row => row[i])));
+        const dimensions = [pattern.length, pattern[0].length];
+
+        // Find center of pattern (should be exact center if odd, floor of center if even)
+        const centerRow = Math.floor(dimensions[0] / 2);
+        const centerColumn = Math.floor(dimensions[1] / 2);
+
+        // Check if point is marked (live) in state
         if (this.state.lifeMatrix[clickX][clickY] === 1) {
 
             // If so, fill it in black and reset state
@@ -52,18 +80,29 @@ class GolCanvas extends Component {
 
         } else {
 
-            // If not, fill it in white(ish)
-            this.setPoint(clickX, clickY, "#F0F0DF")
-            life[clickX][clickY] = 1;
+            // If not (if dead), fill it in white(ish) with cursorPattern
+            for (let row = 0; row < dimensions[0]; row++) {
+                for (let column = 0; column < dimensions[1]; column++) {
+
+                    if (pattern[row][column] === 1) {
+
+                        this.setPoint(clickX - centerRow + row, clickY - centerColumn + column, "#F0F0DF")
+                        life[clickX - centerRow + row][clickY - centerColumn + column] = 1;
+
+                    }
+                }
+            }
+
             this.setState({ lifeMatrix: life })
 
         }
 
     }
 
+    // Function to transform current lifeMatrix on state into lifeMatrix of next generation
     drawCanvas = () => {
 
-        // Get copy of current life state
+        // Initialize empty array to be the lifeMatrix on the next generation
         const newLife = Array(this.props.numwide).fill().map(() => Array(this.props.numhigh).fill(0));
 
         // Iterate through each element and update life state
@@ -76,22 +115,29 @@ class GolCanvas extends Component {
                 for (let c1 = -1; c1 < 2; c1++) {
                     for (let c2 = -1; c2 < 2; c2++) {
 
+                        // Use of modulus here handles some periodic boundary conditions
                         let x = (i + c1) % this.props.numwide;
                         let y = (j + c2) % this.props.numhigh;
 
+                        // Handle remaining horizontal periodic boundary conditions
+                        // Something that disappears on the left should reappear on the right
                         if (x === -1) {
                             x = this.props.numwide - 1;
                         }
 
+                        // Handle remaining vertical periodic boundary conditions
+                        // Something that disappears at the bottom should reappear at the top
                         if (y === -1) {
                             y = this.props.numhigh - 1;
                         }
 
+                        // Skip center cell (we are counting only its neighbors)
+                        if (x === i & y === j) {
+                            continue
+                        }
+
+                        // Add one to count if neighbor cell is alive
                         if (this.state.lifeMatrix[x][y] === 1) {
-                            if (x === i & y === j) {
-                                // Don't count center cell
-                                continue
-                            }
                             liveCount += 1;
                         }
 
@@ -112,7 +158,7 @@ class GolCanvas extends Component {
                 // If fate is death
                 if (newLife[i][j] === 0) {
 
-                    // Fill it in black and reset state
+                    // Fill it in black
                     this.setPoint(i, j, "#303030");
 
                 } else {
@@ -126,23 +172,34 @@ class GolCanvas extends Component {
 
         }
 
+        // Reset state (iterate to the next generation)
         this.setState({ lifeMatrix: newLife })
 
     }
 
     liveOrDie = (st, liveCount) => {
 
+        // If cell is live in current generation
         if (st === 1) {
+
+            // Stay live on next generation if there are 2 or 3 live neighbors
             if ((liveCount === 2) | (liveCount === 3)) {
                 return 1
-            } else {
+
+
+            } else { // Otherwise die on next generation
                 return 0
             }
-        } else {
+
+
+        } else { // If cell is dead in current generation
+
+            // Come back to life on next generation if there are 3 live neighbors
             if (liveCount === 3) {
                 return 1
-            } else {
 
+                // Otherwise stay dead on next generation
+            } else {
                 return 0
             }
         }
@@ -154,27 +211,30 @@ class GolCanvas extends Component {
         // Check status prop
         const stat = this.props.status;
 
+        // If simulation status is 'PAUSED'
         if (stat === 0) {
             return
-        } else {
+        } else { // If simulation status is 'RUNNING'
 
             // Calculate time difference
-            const del = time - this.state.lastTime;
+            const diff = time - this.state.lastTime;
 
-            // If del is bigger than 100 (0.1 second), update canvas
-            if (del >= 100) {
+            // If diff is bigger than 100 (0.1 second), update lifeMatrix & lastTime
+            if (diff >= 100) {
 
                 this.drawCanvas();
                 this.setState({ lastTime: time })
 
             }
 
+            // Not sure exactly what this is doing, but is required for animation
             requestAnimationFrame(this.update)
 
         }
 
     }
 
+    // Resets lifeMatrix on state to an array of zeros for next generation
     handleClearClick = () => {
         this.setState({ lifeMatrix: Array(this.props.numwide).fill().map(() => Array(this.props.numhigh).fill(0)) })
     }
@@ -183,20 +243,30 @@ class GolCanvas extends Component {
         return (
             <div className='GolCanvas'>
 
+                {/* Actual canvas displayed in the UI */}
                 <canvas
                     ref="golcanvas"
                     width={this.props.scl * this.props.numwide}
                     height={this.props.scl * this.props.numhigh}
                     onClick={this.canvasClickHandler}
-                    style={{ 'cursor': 'pointer' }} />
+                    style={{ 'cursor': 'pointer' }}
+                />
+
+                {/* Call update function - starts animation when simulation status is 'RUNNING' (this.props.status === 1) */}
                 {this.update()}
 
                 <div style={{ 'width': '100%' }}>
 
-                    <button className="RegularButton" onClick={() => {
-                        this.props.getPattern(this.state.lifeMatrix)
-                    }}>Save Pattern to State</button>
+                    {/* Button to save pattern to state on App component */}
+                    <button
+                        className="RegularButton"
+                        onClick={() => { this.props.getPattern(this.state.lifeMatrix) }}>
 
+                        Save Pattern to State
+
+                    </button>
+
+                    {/* Button to clear the canvas on next generation */}
                     <button className="RegularButton" onClick={this.handleClearClick} >
 
                         Clear Canvas (Simulation must be Running)

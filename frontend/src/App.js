@@ -11,7 +11,8 @@ class App extends Component {
 
     this.state = {
       scratchPattern: [],
-      mainPattern: []
+      mainPattern: [],
+      cursorPattern: [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
     }
 
   }
@@ -85,17 +86,43 @@ class App extends Component {
 
   }
 
+  setCursorClick = (tiling) => {
+    this.setState({ cursorPattern: tiling })
+  }
+
   render() {
     return (
       <div className="App">
 
         <div className="MainBoardDiv">
-          <GameOfLife numwide={80} numhigh={80} scl={10} title={"Conway's Game of Life Main Board"} getPattern={this.getMainPattern} />
+
+          <GameOfLife
+            numwide={80}
+            numhigh={80}
+            scl={10}
+            title={"Conway's Game of Life Main Board"}
+            getPattern={this.getMainPattern}
+            cursorPattern={this.state.cursorPattern}
+          />
+
         </div>
 
         <div className="ScratchBoardDiv">
-          <GameOfLife numwide={21} numhigh={10} scl={20} title={"Scratch Board"} getPattern={this.getScratchPattern} />
-          <EditorInterface pattern={this.state.scratchPattern} />
+
+          <GameOfLife
+            numwide={21}
+            numhigh={10}
+            scl={20}
+            title={"Scratch Board"}
+            getPattern={this.getScratchPattern}
+            cursorPattern={[[0, 0, 0], [0, 1, 0], [0, 0, 0]]}
+          />
+
+          <EditorInterface
+            pattern={this.state.scratchPattern}
+            setCursorClick={this.setCursorClick}
+          />
+
         </div>
 
       </div>
