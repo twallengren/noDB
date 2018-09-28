@@ -9,26 +9,35 @@ class App extends Component {
 
     super();
 
+    // Used as default pattern on main/only pattern on scratch
+    let singleton = [[0, 0, 0], [0, 1, 0], [0, 0, 0]];
+
     this.state = {
       scratchPattern: [],
       mainPattern: [],
-      cursorPattern: [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
+      cursorPattern: [[0, 0, 0], [0, 1, 0], [0, 0, 0]],
+      singleton: [[0, 0, 0], [0, 1, 0], [0, 0, 0]]
     }
 
   }
 
+  // Function to grab lifeMatrix from scratch board
   getScratchPattern = board => {
 
+    // Extract smallest possible pattern (cut off unnecessary cells from board)
     let pattern = this.patternFromBoard(board);
 
+    // Do nothing if no pattern exists
     if (pattern === 'invalid') {
       return
     }
 
+    // Set scratch pattern to state (so it can be saved to server)
     this.setState({ scratchPattern: pattern })
 
   }
 
+  // Same as getScratchPattern function, but directed toward main board
   getMainPattern = board => {
 
     let pattern = this.patternFromBoard(board);
@@ -41,6 +50,7 @@ class App extends Component {
 
   }
 
+  // Function to strip board of empty cells and return the minimum rectangle required for filled cells
   patternFromBoard = board => {
 
     let i = 0;
@@ -86,6 +96,7 @@ class App extends Component {
 
   }
 
+  // Set cursor pattern as tiling input
   setCursorClick = (tiling) => {
     this.setState({ cursorPattern: tiling })
   }
@@ -94,8 +105,10 @@ class App extends Component {
     return (
       <div className="App">
 
+        {/* Div on left side of screen w/ main board */}
         <div className="MainBoardDiv">
 
+          {/* Main Game of Life board */}
           <GameOfLife
             numwide={80}
             numhigh={80}
@@ -107,17 +120,20 @@ class App extends Component {
 
         </div>
 
+        {/* Div on right side of screen w/ scratch board + pattern list */}
         <div className="ScratchBoardDiv">
 
+          {/* Scratch Game of Life board */}
           <GameOfLife
             numwide={21}
             numhigh={10}
             scl={20}
             title={"Scratch Board"}
             getPattern={this.getScratchPattern}
-            cursorPattern={[[0, 0, 0], [0, 1, 0], [0, 0, 0]]}
+            cursorPattern={this.state.singleton}
           />
 
+          {/* Pattern menu (to select cursor on main) */}
           <EditorInterface
             pattern={this.state.scratchPattern}
             setCursorClick={this.setCursorClick}

@@ -15,7 +15,7 @@ patterns = [
         id: 3
     },
     {
-        name: 'Southwest Flyer',
+        name: 'Southwest Glider',
         tiling: [[0, 1, 0], [1, 0, 0], [1, 1, 1]],
         id: 4
     }

@@ -15,6 +15,7 @@ Displays title, and handles/displays simulation status.
 
 import React, { Component } from 'react';
 import GolCanvas from './GolCanvas';
+import RegularButton from './RegularButton';
 
 class GameOfLife extends Component {
 
@@ -71,13 +72,12 @@ class GameOfLife extends Component {
                     cursorPattern={this.props.cursorPattern}
                 />
 
-                <button className="RegularButton" onClick={this.handleSimClick} >
+                <RegularButton
+                    clickFunc={this.handleSimClick}
+                    buttonText={'Start/Stop Simulation'}
+                />
 
-                    Start/Stop Simulation
-
-                </button>
-
-            </div>
+            </div >
         )
     }
 }

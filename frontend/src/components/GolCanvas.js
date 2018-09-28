@@ -14,6 +14,7 @@ This component contains the canvas for the game of life. Handles animation and d
 */
 
 import React, { Component } from 'react';
+import RegularButton from './RegularButton';
 
 class GolCanvas extends Component {
 
@@ -51,7 +52,8 @@ class GolCanvas extends Component {
         this.ctx.fillRect(x, y, 1, 1);
     }
 
-    // Function to handle clicks on the canvas (should fill in the canvas where clicked)
+    // Function to handle clicks on the canvas (should fill in the canvas with cursor cdpattern where clicked)
+    // will turn off a cell if it is currently on (on --> off does not use the cursor pattern)
     canvasClickHandler = event => {
 
         // Get x & y coordinates of click
@@ -61,12 +63,16 @@ class GolCanvas extends Component {
         // Create copy of lifeMatrix
         const life = Array.from(this.state.lifeMatrix);
 
-        // Get cursor pattern, determine size
+        // Get cursor pattern
         let pattern = this.props.cursorPattern;
+
+        // Transpose pattern (appears upside-down in UI without this)
         pattern = (pattern[0].map((col, i) => pattern.map(row => row[i])));
+
+        // Get dimensions of pattern
         const dimensions = [pattern.length, pattern[0].length];
 
-        // Find center of pattern (should be exact center if odd, floor of center if even)
+        // Find center of pattern (should be exact center if odd, just before center if even)
         const centerRow = Math.floor(dimensions[0] / 2);
         const centerColumn = Math.floor(dimensions[1] / 2);
 
@@ -80,7 +86,7 @@ class GolCanvas extends Component {
 
         } else {
 
-            // If not (if dead), fill it in white(ish) with cursorPattern
+            // If clicked point is dead in current iteration, fill it in white(ish) with cursorPattern
             for (let row = 0; row < dimensions[0]; row++) {
                 for (let column = 0; column < dimensions[1]; column++) {
 
@@ -249,7 +255,6 @@ class GolCanvas extends Component {
                     width={this.props.scl * this.props.numwide}
                     height={this.props.scl * this.props.numhigh}
                     onClick={this.canvasClickHandler}
-                    style={{ 'cursor': 'pointer' }}
                 />
 
                 {/* Call update function - starts animation when simulation status is 'RUNNING' (this.props.status === 1) */}
@@ -258,20 +263,16 @@ class GolCanvas extends Component {
                 <div style={{ 'width': '100%' }}>
 
                     {/* Button to save pattern to state on App component */}
-                    <button
-                        className="RegularButton"
-                        onClick={() => { this.props.getPattern(this.state.lifeMatrix) }}>
-
-                        Save Pattern to State
-
-                    </button>
+                    <RegularButton
+                        clickFunc={() => { this.props.getPattern(this.state.lifeMatrix) }}
+                        buttonText={'Save Pattern to State'}
+                    />
 
                     {/* Button to clear the canvas on next generation */}
-                    <button className="RegularButton" onClick={this.handleClearClick} >
-
-                        Clear Canvas (Simulation must be Running)
-
-                    </button>
+                    <RegularButton
+                        clickFunc={this.handleClearClick}
+                        buttonText={'Clear Canvas (Simulation Must Be Running'}
+                    />
 
                 </div>
 

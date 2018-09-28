@@ -52,7 +52,9 @@ class Pattern extends Component {
                     className="buttonCanvas" />
 
                 {/* Button to set pattern as pointer on main canvas */}
-                <button className='PatternButton' onClick={() => { this.props.setCursorClick(this.props.tiling) }}>{this.props.name}</button>
+                <button className='PatternButton' onClick={() => { this.props.setCursorClick(this.props.tiling) }}>
+                    Set {this.props.name} as cursor on main.
+                </button>
 
                 {/* Button to delete pattern from menu (and remove from server) */}
                 <button onClick={() => { this.props.delFunc(this.props.id) }} style={{ 'cursor': 'pointer' }}>DELETE</button>

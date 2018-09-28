@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Pattern from './Pattern'
+import RegularButton from './RegularButton';
 
 const BASE_URL = "http://localhost:3005";
 
@@ -67,9 +68,16 @@ class EditorInterface extends Component {
         return (
 
             <div className="AllPatterns">
+
                 <input placeholder='Name of New Pattern' onChange={this.handleNewName} style={{ 'width': '100%' }} />
-                <button className="RegularButton" onClick={this.addPattern}>Add Pattern from Scratch Board (must be saved to state)</button>
+
+                <RegularButton
+                    clickFunc={this.addPattern}
+                    buttonText={'Add Pattern from Scratch Board (must be saved to state)'}
+                />
+
                 {patterns}
+
             </div>
 
         );
