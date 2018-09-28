@@ -222,7 +222,7 @@ class GolCanvas extends Component {
             return
         } else { // If simulation status is 'RUNNING'
 
-            // Calculate time difference
+            // Calculate time since last update (diff)
             const diff = time - this.state.lastTime;
 
             // If diff is bigger than 100 (0.1 second), update lifeMatrix & lastTime
