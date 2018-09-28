@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RegularButton from './RegularButton';
 
 // This component renders one of the lines on the pattern selection menu
 // Has picture of pattern, name on button, and delete button
@@ -52,12 +53,16 @@ class Pattern extends Component {
                     className="buttonCanvas" />
 
                 {/* Button to set pattern as pointer on main canvas */}
-                <button className='PatternButton' onClick={() => { this.props.setCursorClick(this.props.tiling) }}>
-                    Set {this.props.name} as cursor on main.
-                </button>
+                <RegularButton
+                    clickFunc={() => { this.props.setCursorClick(this.props.tiling) }}
+                    buttonText={`Set ${this.props.name} as cursor on main.`}
+                />
 
                 {/* Button to delete pattern from menu (and remove from server) */}
-                <button onClick={() => { this.props.delFunc(this.props.id) }} style={{ 'cursor': 'pointer' }}>DELETE</button>
+                <RegularButton
+                    clickFunc={() => { this.props.delFunc(this.props.id) }}
+                    buttonText={'DELETE'}
+                />
 
             </div>
         );
