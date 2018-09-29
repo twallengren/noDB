@@ -52,11 +52,13 @@ class Pattern extends Component {
                     height={8 * this.props.tiling.length}
                     className="buttonCanvas" />
 
-                {/* Button to set pattern as pointer on main canvas */}
-                <RegularButton
-                    clickFunc={() => { this.props.setCursorClick(this.props.tiling) }}
-                    buttonText={`Set ${this.props.name} as cursor on main.`}
-                />
+                <div style={{ 'display': 'flex' }}>
+                    {/* Button to set pattern as pointer on main canvas */}
+                    <RegularButton
+                        clickFunc={() => { this.props.setCursorClick(this.props.tiling) }}
+                        buttonText={`Set ${this.props.name} as cursor on main.`}
+                    />
+                </div>
 
                 <div style={{ 'display': 'flex' }}>
                     {/* Button to delete pattern from menu (and remove from server) */}
