@@ -7,7 +7,7 @@ Usage
     numhigh={int > 0} // Number of rows (how many cell tall canvas should be)
     scl={int > 0} // How many pixels make one side of a square cell 
     getPattern={this.props.getPattern} // Passed down from App.js so it can access lifeMatrix
-    />
+/>
 
 This component contains the canvas for the game of life. Handles animation and direct interaction with canvas.
 
@@ -150,16 +150,9 @@ class GolCanvas extends Component {
                     }
                 }
 
-                // Decide fate
+                // Decide fate (1 -> live on next generation, 0 -> dead on next generation)
                 const newFate = this.liveOrDie(this.state.lifeMatrix[i][j], liveCount);
                 newLife[i][j] = newFate;
-
-            }
-        }
-
-        // Iterate through each element and update life state
-        for (let i = 0; i < this.props.numwide; i++) {
-            for (let j = 0; j < this.props.numhigh; j++) {
 
                 // If fate is death
                 if (newLife[i][j] === 0) {
@@ -175,7 +168,6 @@ class GolCanvas extends Component {
                 }
 
             }
-
         }
 
         // Reset state (iterate to the next generation)
@@ -255,7 +247,7 @@ class GolCanvas extends Component {
                     width={this.props.scl * this.props.numwide}
                     height={this.props.scl * this.props.numhigh}
                     onClick={this.canvasClickHandler}
-                    style={{ 'border-radius': '5%' }}
+                    style={{ 'border-radius': '2%' }}
                 />
 
                 {/* Call update function - starts animation when simulation status is 'RUNNING' (this.props.status === 1) */}
@@ -272,7 +264,7 @@ class GolCanvas extends Component {
                     {/* Button to clear the canvas on next generation */}
                     <RegularButton
                         clickFunc={this.handleClearClick}
-                        buttonText={'Clear Canvas (Simulation Must Be Running'}
+                        buttonText={'Clear Canvas (Simulation Must Be Running)'}
                     />
 
                 </div>
