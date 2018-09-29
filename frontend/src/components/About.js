@@ -30,6 +30,8 @@ class About extends Component {
 
                 <p className="aboutText">Indeed, since Life includes a pattern that is equivalent to a Universal Turing Machine (UTM), this deciding algorithm, if it existed, could be used to solve the halting problem by taking the initial pattern as the one corresponding to a UTM plus an input, and the later pattern as the one corresponding to a halting state of the UTM. It also follows that some patterns exist that remain chaotic forever. If this were not the case, one could progress the game sequentially until a non-chaotic pattern emerged, then compute whether a later pattern was going to appear.</p>
 
+                <p className="aboutText">For a more in-depth look at Conway's Game of Life, see <a href="http://web.stanford.edu/~cdebs/GameOfLife/">http://web.stanford.edu/~cdebs/GameOfLife/</a></p>
+
             </div>
 
         )
