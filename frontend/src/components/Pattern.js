@@ -12,7 +12,7 @@ class Pattern extends Component {
         this.ctx = canvas.getContext("2d");
 
         // Scale context
-        this.ctx.scale(20, 20);
+        this.ctx.scale(8, 8);
 
         // Fill the canvas black
         this.ctx.fillStyle = "#303030";
@@ -48,8 +48,8 @@ class Pattern extends Component {
                 {/* Canvas element with pattern in it */}
                 <canvas
                     ref="canvas"
-                    width={20 * this.props.tiling[0].length}
-                    height={20 * this.props.tiling.length}
+                    width={8 * this.props.tiling[0].length}
+                    height={8 * this.props.tiling.length}
                     className="buttonCanvas" />
 
                 {/* Button to set pattern as pointer on main canvas */}

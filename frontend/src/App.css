@@ -70,3 +70,16 @@
 .links {
   color: #F0F0DF;
 }
+
+.About {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-image: url(intersection.png);
+  background-repeat: repeat;
+}
+
+.aboutText {
+  width: 50%;
+}
