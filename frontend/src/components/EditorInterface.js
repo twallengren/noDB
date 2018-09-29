@@ -101,7 +101,7 @@ class EditorInterface extends Component {
             <div className="AllPatterns">
 
                 {/* Text input box that defines the name of the new pattern added from the scratch board */}
-                <input placeholder='Name of New Pattern' onChange={this.handleNewName} style={{ 'width': '100%' }} />
+                <input type="search" placeholder='Name of New Pattern' onChange={this.handleNewName} style={{ 'width': '100%' }} />
 
                 {/* Button to add pattern from scratch board to server/list in UI  */}
                 <RegularButton
