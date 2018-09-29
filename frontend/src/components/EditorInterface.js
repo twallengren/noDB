@@ -68,6 +68,14 @@ class EditorInterface extends Component {
         })
     }
 
+    updatePattern = patternid => {
+
+        axios.put(`${BASE_URL}/api/patterns/${patternid}`, { name: this.state.newName }).then(response => {
+            this.setState({ patterns: response.data })
+        })
+
+    }
+
     render() {
 
         // Define patterns to display
@@ -82,6 +90,7 @@ class EditorInterface extends Component {
                     key={pattern.id}
                     delFunc={this.deletePattern}
                     setCursorClick={this.props.setCursorClick}
+                    updateFunc={this.updatePattern}
                 />
 
             );

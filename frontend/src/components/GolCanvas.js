@@ -247,7 +247,7 @@ class GolCanvas extends Component {
                     width={this.props.scl * this.props.numwide}
                     height={this.props.scl * this.props.numhigh}
                     onClick={this.canvasClickHandler}
-                    style={{ 'border-radius': '2%' }}
+                    style={{ 'borderRadius': '2%' }}
                 />
 
                 {/* Call update function - starts animation when simulation status is 'RUNNING' (this.props.status === 1) */}

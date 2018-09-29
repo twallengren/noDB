@@ -1,3 +1,4 @@
+// Manually define array for Gosper Glider Gun (pain in the ass gun)
 let gosper = Array(9).fill().map(() => Array(36).fill(0))
 gosper[0][24] = 1;
 gosper[1][22] = 1;
@@ -114,9 +115,34 @@ module.exports = {
 
         const { patternID } = req.params;
 
-        updatedpatterns = patterns.filter(pattern => {
+        let updatedpatterns = patterns.filter(pattern => {
 
             return pattern.id != patternID
+
+        })
+
+        patterns = updatedpatterns;
+
+        res.status(200).send(patterns)
+
+    },
+
+    update: (req, res, next) => {
+
+        const { patternID } = req.params;
+        let { name } = req.body;
+
+        let updatedpatterns = patterns.map(pattern => {
+
+            if (pattern.id == patternID) {
+                return {
+                    name: name,
+                    tiling: pattern.tiling,
+                    id: patternID
+                }
+            } else {
+                return pattern
+            }
 
         })
 

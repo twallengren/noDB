@@ -58,11 +58,18 @@ class Pattern extends Component {
                     buttonText={`Set ${this.props.name} as cursor on main.`}
                 />
 
-                {/* Button to delete pattern from menu (and remove from server) */}
-                <RegularButton
-                    clickFunc={() => { this.props.delFunc(this.props.id) }}
-                    buttonText={'DELETE'}
-                />
+                <div style={{ 'display': 'flex' }}>
+                    {/* Button to delete pattern from menu (and remove from server) */}
+                    <RegularButton
+                        clickFunc={() => { this.props.delFunc(this.props.id) }}
+                        buttonText={'DELETE'}
+                    />
+
+                    <RegularButton
+                        clickFunc={() => { this.props.updateFunc(this.props.id) }}
+                        buttonText={'UPDATE NAME'}
+                    />
+                </div>
 
             </div>
         );

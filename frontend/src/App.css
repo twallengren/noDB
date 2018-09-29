@@ -42,7 +42,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow: scroll;
   padding-top: 20px;
 }
 

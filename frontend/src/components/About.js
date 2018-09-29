@@ -9,7 +9,7 @@ class About extends Component {
 
                 <h1>WTF IS THIS?</h1>
 
-                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Gospers_glider_gun.gif" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Gospers_glider_gun.gif" alt="Gosper Glider Gun" />
 
                 <p className="aboutText">The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.</p>
 
