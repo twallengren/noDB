@@ -45,14 +45,23 @@ class Pattern extends Component {
         return (
             <div key={this.props.id} className='PatternDisplay'>
 
-                {/* Canvas element with pattern in it */}
-                <canvas
-                    ref="canvas"
-                    width={8 * this.props.tiling[0].length}
-                    height={8 * this.props.tiling.length}
-                    className="buttonCanvas" />
+                <div style={{
+                    'height': '100%',
+                    'width': 'auto',
+                    'display': 'flex'
+                }}>
+                    {/* Canvas element with pattern in it */}
+                    <canvas
+                        ref="canvas"
+                        width={8 * this.props.tiling[0].length}
+                        height={8 * this.props.tiling.length}
+                        className="buttonCanvas" />
+                </div>
 
-                <div style={{ 'display': 'flex' }}>
+                <div style={{
+                    'display': 'flex',
+                    'width': '33%'
+                }}>
                     {/* Button to set pattern as pointer on main canvas */}
                     <RegularButton
                         clickFunc={() => { this.props.setCursorClick(this.props.tiling) }}
@@ -60,7 +69,10 @@ class Pattern extends Component {
                     />
                 </div>
 
-                <div style={{ 'display': 'flex' }}>
+                <div style={{
+                    'display': 'flex',
+                    'width': '33%'
+                }}>
                     {/* Button to delete pattern from menu (and remove from server) */}
                     <RegularButton
                         clickFunc={() => { this.props.delFunc(this.props.id) }}
