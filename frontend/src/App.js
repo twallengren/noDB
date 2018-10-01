@@ -21,12 +21,16 @@ class App extends Component {
         <nav className='nav'>
           <div className='link-wrap'>
 
-            <Link to="/">
-              <div className='links'>GAME OF LIFE SANDBOX</div>
-            </Link>
-
             <Link to="/about">
               <div className='links'>WTF IS THIS?</div>
+            </Link>
+
+            <Link to="/tutorial">
+              <div className='links'>LEARN</div>
+            </Link>
+
+            <Link to="/">
+              <div className='links'>GAME OF LIFE SANDBOX</div>
             </Link>
 
           </div>

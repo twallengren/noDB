@@ -4,6 +4,7 @@ import { spring, AnimatedSwitch } from 'react-router-transition';
 
 import Home from "./components/Main";
 import About from "./components/About";
+import Tutorial from "./components/Tutorial"
 
 // we need to map the `scale` prop we define below
 // to the transform style property
@@ -54,6 +55,7 @@ class Routes extends Component {
                 >
                     <Route path="/" component={Home} exact />
                     <Route path="/about" component={About} />
+                    <Route path="/tutorial" component={Tutorial} />
                 </AnimatedSwitch>
             </div>
         )
