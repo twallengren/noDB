@@ -22,11 +22,11 @@ class App extends Component {
           <div className='link-wrap'>
 
             <Link to="/about">
-              <div className='links'>WTF IS THIS?</div>
+              <div className='links'>BASIC INFO</div>
             </Link>
 
             <Link to="/tutorial">
-              <div className='links'>LEARN</div>
+              <div className='links'>LEARN MORE</div>
             </Link>
 
             <Link to="/">

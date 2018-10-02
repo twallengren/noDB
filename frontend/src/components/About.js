@@ -7,7 +7,7 @@ class About extends Component {
 
             <div className="About">
 
-                <h1>WTF IS THIS?</h1>
+                <h1>BASIC INFO</h1>
 
                 <img src="https://upload.wikimedia.org/wikipedia/commons/e/e5/Gospers_glider_gun.gif" alt="Gosper Glider Gun" />
 
