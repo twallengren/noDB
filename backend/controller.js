@@ -37,6 +37,28 @@ gosper[7][15] = 1;
 gosper[8][12] = 1;
 gosper[8][13] = 1;
 
+let grep = Array(7).fill().map(() => Array(22).fill(0));
+grep[0][10] = 1;
+grep[0][12] = 1;
+grep[1][10] = 1;
+grep[1][14] = 1;
+grep[2][0] = 1;
+grep[2][1] = 1;
+grep[2][14] = 1;
+grep[3][0] = 1;
+grep[3][1] = 1;
+grep[3][10] = 1;
+grep[3][15] = 1;
+grep[3][20] = 1;
+grep[3][21] = 1;
+grep[4][14] = 1;
+grep[4][20] = 1;
+grep[4][21] = 1;
+grep[5][10] = 1;
+grep[5][14] = 1;
+grep[6][10] = 1;
+grep[6][12] = 1;
+
 patterns = [
     {
         name: 'Singleton',
@@ -77,10 +99,15 @@ patterns = [
         name: 'Gosper Glider Gun',
         tiling: gosper,
         id: 8
+    },
+    {
+        name: 'Gosper-like Repeater',
+        tiling: grep,
+        id: 9
     }
 ]
 
-let id = 9;
+let id = 10;
 
 module.exports = {
 
